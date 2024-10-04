@@ -4,14 +4,15 @@ import sys
 
 from colorama import Fore
 
-from YOLO2RT.commands import Builder,Seg_exporter,Det_exporter
+from YOLO2RT.commands import Builder,Seg_exporter,Det_exporter,TrtBuilder
 
 from YOLO2RT.version import VERSION
 
 
 FUNCTION_MAP = {'Builder': Builder,
                 'Seg_exporter': Seg_exporter,
-                'Det_exporter': Det_exporter,}
+                'Det_exporter': Det_exporter,
+                'TrtBuilder': TrtBuilder,}
 
 
 
