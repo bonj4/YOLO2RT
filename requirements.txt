@@ -6,3 +6,4 @@ torch
 torchvision
 ultralytics
 tensorrt
+colorama
