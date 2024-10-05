@@ -4,7 +4,7 @@ from pathlib import Path
 import cv2
 import numpy as np
 
-from config import CLASSES_CLS
+from YOLO2RT.inferences.config import CLASSES_CLS
 from YOLO2RT.models.utils import blob, path_to_list
 
 

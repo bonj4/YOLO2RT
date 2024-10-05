@@ -5,7 +5,7 @@ from pathlib import Path
 import cv2
 import torch
 
-from config import CLASSES_DET, COLORS
+from YOLO2RT.inferences.config import CLASSES_DET, COLORS
 from YOLO2RT.models.torch_utils import det_postprocess
 from YOLO2RT.models.utils import blob, letterbox, path_to_list
 

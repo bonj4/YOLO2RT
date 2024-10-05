@@ -4,7 +4,7 @@ from pathlib import Path
 import cv2
 import numpy as np
 
-from config import CLASSES_DET, COLORS
+from YOLO2RT.inferences.config import CLASSES_DET, COLORS
 from YOLO2RT.models.utils import blob, det_postprocess, letterbox, path_to_list
 
 

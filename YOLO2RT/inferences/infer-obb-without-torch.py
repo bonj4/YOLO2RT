@@ -4,7 +4,7 @@ from pathlib import Path
 import cv2
 import numpy as np
 
-from config import CLASSES_OBB, COLORS_OBB
+from YOLO2RT.inferences.config import CLASSES_OBB, COLORS_OBB
 from YOLO2RT.models.utils import blob, letterbox, obb_postprocess, path_to_list
 
 

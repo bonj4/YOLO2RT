@@ -4,7 +4,7 @@ from pathlib import Path
 import cv2
 import numpy as np
 
-from config import COLORS, KPS_COLORS, LIMB_COLORS, SKELETON
+from YOLO2RT.inferences.config import COLORS, KPS_COLORS, LIMB_COLORS, SKELETON
 from YOLO2RT.models.utils import blob, letterbox, path_to_list, pose_postprocess
 
 

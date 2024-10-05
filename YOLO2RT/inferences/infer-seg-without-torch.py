@@ -4,7 +4,7 @@ from pathlib import Path
 import cv2
 import numpy as np
 
-from config import ALPHA, CLASSES_SEG, COLORS, MASK_COLORS
+from YOLO2RT.inferences.config import ALPHA, CLASSES_SEG, COLORS, MASK_COLORS
 from YOLO2RT.models.utils import blob, letterbox, path_to_list, seg_postprocess
 
 

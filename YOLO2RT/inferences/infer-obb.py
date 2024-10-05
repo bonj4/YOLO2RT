@@ -5,7 +5,7 @@ from pathlib import Path
 import cv2
 import torch
 
-from config import CLASSES_OBB, COLORS_OBB
+from YOLO2RT.inferences.config import CLASSES_OBB, COLORS_OBB
 from YOLO2RT.models.torch_utils import obb_postprocess
 from YOLO2RT.models.utils import blob, letterbox, path_to_list
 

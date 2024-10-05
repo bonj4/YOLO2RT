@@ -6,7 +6,7 @@ import cv2
 import numpy as np
 import torch
 
-from config import ALPHA, CLASSES_SEG, COLORS, MASK_COLORS
+from YOLO2RT.inferences.config import  ALPHA, CLASSES_SEG, COLORS, MASK_COLORS
 from YOLO2RT.models.torch_utils import seg_postprocess
 from YOLO2RT.models.utils import blob, letterbox, path_to_list
 
