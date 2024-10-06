@@ -1,19 +1,20 @@
 # YOLO2RT
-# YOLO2RT
 
-YOLO2RT is a tool for converting YOLO models to TensorRT for optimized inference performance.
+YOLO2RT is a tool designed for converting YOLO models to TensorRT, optimizing them for enhanced inference performance.
 
 ## Installation
 
-```bash
-pip install .
-```
-
-## Usage
+You can install YOLO2RT directly from the GitHub repository:
 
 ```bash
-YOLO2RT -h
+pip install git+https://github.com/yourusername/YOLO2RT.git
 ```
+Alternatively, if you have cloned the repository, you can install it locally:
+```bash
+git clone https://github.com/bonj4/YOLO2RT.git
+pip install -e .
+```
+
 
 ### Object Detection
 
