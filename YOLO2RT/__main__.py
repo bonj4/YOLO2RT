@@ -4,7 +4,7 @@ import sys
 
 from colorama import Fore
 
-from YOLO2RT.commands import Builder,Seg_exporter,Det_exporter,TrtBuilder
+from YOLO2RT.commands import Builder,Seg_exporter,Det_exporter,TrtBuilder,InferDet
 
 from YOLO2RT.version import VERSION
 
@@ -12,7 +12,8 @@ from YOLO2RT.version import VERSION
 FUNCTION_MAP = {'Builder': Builder,
                 'Seg_exporter': Seg_exporter,
                 'Det_exporter': Det_exporter,
-                'TrtBuilder': TrtBuilder,}
+                'TrtBuilder': TrtBuilder,
+                'InferDet':InferDet}
 
 
 
@@ -46,10 +47,10 @@ def main():
     args = parser.parse_args()
 
     if hasattr(args, 'func'):
-        try:
+#        try:
             args.func(vars(args))
-        except Exception as e:
-            parser.error(e)
+ #       except Exception as e:
+  #          parser.error(e)
     else:
         parser.print_help()
 
