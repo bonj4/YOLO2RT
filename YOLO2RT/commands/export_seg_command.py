@@ -9,33 +9,27 @@ class Seg_exporter:
 
         group = parser.add_argument_group("export segmentation options")
 
-        group.add_argument('--engine', type=str, help='Engine file')
-
-        group.add_argument('--imgs', type=str, help='Images file')
-
-        group.add_argument('--show',
-                            action='store_true',
-                            help='Show the detection results')
-
-        group.add_argument('--out-dir',
+        group.add_argument('-w',
+                            '--weights',
                             type=str,
-                            default='./output',
-                            help='Path to output file')
-
-        group.add_argument('--conf-thres',
-                            type=float,
-                            default=0.25,
-                            help='Confidence threshold')
-
-        group.add_argument('--iou-thres',
-                            type=float,
-                            default=0.65,
-                            help='Confidence threshold')
-
+                            required=True,
+                            help='PyTorch yolov8 weights')
+        group.add_argument('--opset',
+                            type=int,
+                            default=11,
+                            help='ONNX opset version')
+        group.add_argument('--sim',
+                            action='store_true',
+                            help='simplify onnx model')
+        group.add_argument('--input-shape',
+                            nargs='+',
+                            type=int,
+                            default=[1, 3, 640, 640],
+                            help='Model input shape only for api builder')
         group.add_argument('--device',
                             type=str,
-                            default='cuda:0',
-                            help='TensorRT infer device')
+                            default='cpu',
+                            help='Export ONNX device')
 
     def filter_args(self, args):
         return {k: v for k, v in args.items() if k in seg_exporter.__code__.co_varnames}
