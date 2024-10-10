@@ -41,7 +41,7 @@ def parse_args():
     return args
 
 
-def builder(weights,device,topk,fp16,input_shape,iou_thres,conf_thres,seg):
+def builder(weights, device, topk, fp16, input_shape, iou_thres, conf_thres, seg):
     builder = EngineBuilder(weights, device)
     builder.seg = seg
     builder.build(fp16=fp16,
