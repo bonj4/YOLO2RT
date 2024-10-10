@@ -1,28 +1,27 @@
-from YOLO2RT.models import TRTModule  # isort:skip
-import argparse
 from pathlib import Path
 
 import cv2
 import numpy as np
 import torch
 
-from YOLO2RT.inferences.config import  ALPHA, CLASSES_SEG, COLORS, MASK_COLORS
+from YOLO2RT.inferences.config import ALPHA, CLASSES_SEG, COLORS, MASK_COLORS
+from YOLO2RT.models import TRTModule  # isort:skip
 from YOLO2RT.models.torch_utils import seg_postprocess
 from YOLO2RT.models.utils import blob, letterbox, path_to_list
 
 
-def main(args: argparse.Namespace) -> None:
-    device = torch.device(args.device)
-    Engine = TRTModule(args.engine, device)
+def inferseg(imgs, engine, device, out_dir, show) -> None:
+    device = torch.device(device)
+    Engine = TRTModule(engine, device)
     H, W = Engine.inp_info[0].shape[-2:]
 
     # set desired output names order
     Engine.set_desired(['outputs', 'proto'])
 
-    images = path_to_list(args.imgs)
-    save_path = Path(args.out_dir)
+    images = path_to_list(imgs)
+    save_path = Path(out_dir)
 
-    if not args.show and not save_path.exists():
+    if not show and not save_path.exists():
         save_path.mkdir(parents=True, exist_ok=True)
 
     for image in images:
@@ -41,7 +40,7 @@ def main(args: argparse.Namespace) -> None:
         seg_img = torch.asarray(seg_img[dh:H - dh, dw:W - dw, [2, 1, 0]],
                                 device=device)
         bboxes, scores, labels, masks = seg_postprocess(
-            data, bgr.shape[:2], args.conf_thres, args.iou_thres)
+            data, bgr.shape[:2])
         if bboxes.numel() == 0:
             # if no bounding box
             print(f'{image}: no object!')
@@ -71,40 +70,8 @@ def main(args: argparse.Namespace) -> None:
                         cv2.FONT_HERSHEY_SIMPLEX,
                         0.75, [225, 255, 255],
                         thickness=2)
-        if args.show:
+        if show:
             cv2.imshow('result', draw)
             cv2.waitKey(0)
         else:
             cv2.imwrite(str(save_image), draw)
-
-
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--engine', type=str, help='Engine file')
-    parser.add_argument('--imgs', type=str, help='Images file')
-    parser.add_argument('--show',
-                        action='store_true',
-                        help='Show the detection results')
-    parser.add_argument('--out-dir',
-                        type=str,
-                        default='./output',
-                        help='Path to output file')
-    parser.add_argument('--conf-thres',
-                        type=float,
-                        default=0.25,
-                        help='Confidence threshold')
-    parser.add_argument('--iou-thres',
-                        type=float,
-                        default=0.65,
-                        help='Confidence threshold')
-    parser.add_argument('--device',
-                        type=str,
-                        default='cuda:0',
-                        help='TensorRT infer device')
-    args = parser.parse_args()
-    return args
-
-
-if __name__ == '__main__':
-    args = parse_args()
-    main(args)
