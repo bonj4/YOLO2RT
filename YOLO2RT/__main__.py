@@ -7,7 +7,7 @@ from colorama import Fore
 from YOLO2RT.commands import Builder,Seg_exporter,Det_exporter,TrtBuilder,InferDet,InferSeg
 
 from YOLO2RT.version import VERSION
-
+from YOLO2RT.info import get_latest_version
 
 FUNCTION_MAP = {'Builder': Builder,
                 'Seg_exporter': Seg_exporter,
@@ -29,7 +29,17 @@ def main():
     print(f"{Fore.BLUE}Welcome to YOLO2RT\n"
           f"YOLO2RT allows you to convert your yolo models to engine.{Fore.RESET}\n")
 
+    latest_version = get_latest_version()
 
+    if latest_version:
+        if latest_version > VERSION:
+            print(f"{Fore.RED}A newer version ({latest_version}) is available!{Fore.RESET}")
+            print(
+                f'{Fore.RED}For latest YOLO2RT version please update with "pip install YOLO2RT --upgrade"{Fore.RESET} \n')
+        else:
+            print(f"{Fore.GREEN}You have the latest YOLO2RT version ({VERSION}) installed.{Fore.RESET}\n")
+    else:
+        print(f"{Fore.RED}Unable to fetch the latest YOLO2RT version information.{Fore.RESET}\n")
 
 
     parser = argparse.ArgumentParser(description="YOLO2RT")
